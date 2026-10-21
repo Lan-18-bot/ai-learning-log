@@ -84,8 +84,17 @@ client = get_client(api_key)
 # 对话历史放在 session_state 里，重跑页面不会丢
 if "messages" not in st.session_state:
     st.session_state.messages = []
+    # 只在第一次打开时放进去一条"规矩",之后不会重复添加
+    st.session_state.messages.append(
+        {
+            "role": "system",
+            "content": "你是一位耐心的编程入门老师。回答要简短，口语化，多用生活里的类比。",
+        }
+    )
 
 for message in st.session_state.messages:
+    if message["role"] == "system":
+        continue                      # ← 加这两行:规矩是给 AI 看的，不给用户看
     with st.chat_message(message["role"]):
         st.write(message["content"])
 
