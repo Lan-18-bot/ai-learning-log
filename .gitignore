@@ -1,2 +1,13 @@
-﻿.env
+﻿# 密钥文件：任何以 .env 开头的都不许进仓库（含 .env.bak / .env.local 等副本）
+.env*
+
+# 备份文件
+*.bak*
+
+# Python
 __pycache__/
+*.pyc
+
+# 生成的图片（每张约 1.5MB，不该进仓库；用量.csv 保留）
+画面/shots/
+画面/*.png
